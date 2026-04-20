@@ -1,0 +1,15 @@
+{
+  "name": "imoturbo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "extension"
+  ],
+  "scripts": {
+    "dev:backend": "npm --workspace backend run dev",
+    "dev:extension": "npm --workspace extension run dev",
+    "build": "npm --workspace backend run build && npm --workspace extension run build",
+    "typecheck": "npm --workspace backend run typecheck && npm --workspace extension run typecheck"
+  }
+}
