@@ -1,0 +1,12 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="8" cy="8" r="8" fill="#1F2937"/>
+  
+  <!-- Lightning bolt (turbo) -->
+  <path d="M8 2L10 6H7L9 12L4 7H6L4 2H8Z" fill="#10B981" stroke="#10B981" stroke-width="0.5" stroke-linejoin="round"/>
+  
+  <!-- Building shape overlay (subtle) -->
+  <rect x="4" y="7" width="8" height="7" fill="none" stroke="#10B981" stroke-width="0.5" opacity="0.3"/>
+  <line x1="6" y1="7" x2="6" y2="14" stroke="#10B981" stroke-width="0.5" opacity="0.3"/>
+  <line x1="10" y1="7" x2="10" y2="14" stroke="#10B981" stroke-width="0.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background -->
+  <rect width="48" height="48" rx="8" fill="#1F2937"/>
+  
+  <!-- Building base -->
+  <path d="M12 20L24 8L36 20V40H12V20Z" fill="#10B981" opacity="0.9"/>
+  
+  <!-- Roof accent -->
+  <path d="M24 8L28 14H20L24 8Z" fill="#059669" stroke="#10B981" stroke-width="1"/>
+  
+  <!-- Lightning bolt inside -->
+  <g transform="translate(24, 24)">
+    <path d="M0 -12L4 -2L-2 0L2 8L-4 2L0 0Z" fill="#FCD34D" stroke="#FCD34D" stroke-width="0.5" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Windows (upper) -->
+  <rect x="16" y="18" width="4" height="4" fill="#1F2937"/>
+  <rect x="28" y="18" width="4" height="4" fill="#1F2937"/>
+  
+  <!-- Windows (middle) -->
+  <rect x="16" y="26" width="4" height="4" fill="#1F2937"/>
+  <rect x="28" y="26" width="4" height="4" fill="#1F2937"/>
+  
+  <!-- Windows (lower) -->
+  <rect x="16" y="34" width="4" height="4" fill="#1F2937"/>
+  <rect x="28" y="34" width="4" height="4" fill="#1F2937"/>
+</svg>
