@@ -157,6 +157,42 @@ export function Sidebar({
               items={result.bullshit_warnings}
               tone="amber"
             />
+            <Details
+              title="Аргументи за договаряне"
+              items={result.negotiation_points}
+              tone="blue"
+            />
+
+            <section className="rounded-lg border border-stone-200 bg-white p-4">
+              <p className="text-sm font-semibold">Общ бюджет</p>
+              <div className="mt-3 space-y-2 text-sm">
+                <BudgetRow label="Цена на предлагане" value={result.budget_estimate.asking} />
+                <BudgetRow label="Нотариални такси и данъци" value={result.budget_estimate.notary_and_taxes} />
+                {result.budget_estimate.broker_commission > 0 && (
+                  <BudgetRow label="Брокерска комисионна" value={result.budget_estimate.broker_commission} />
+                )}
+                {result.budget_estimate.renovation > 0 && (
+                  <BudgetRow label="Оценка за ремонт" value={result.budget_estimate.renovation} />
+                )}
+                <div className="flex justify-between border-t border-stone-200 pt-2 font-bold">
+                  <span>Общо</span>
+                  <span>{eur(result.budget_estimate.total)}</span>
+                </div>
+              </div>
+              {result.budget_estimate.notes.length > 0 && (
+                <ul className="mt-3 space-y-1">
+                  {result.budget_estimate.notes.map((note) => (
+                    <li key={note} className="text-xs text-stone-500">{note}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+
+            <Details
+              title="Въпроси към продавача"
+              items={result.questions_to_ask}
+              tone="purple"
+            />
 
             <section className="rounded-lg border border-stone-200 bg-white p-4">
               <p className="text-sm font-semibold">Стратегия за оферта</p>
@@ -240,6 +276,15 @@ function Metric({
   );
 }
 
+function BudgetRow({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="flex justify-between text-stone-600">
+      <span>{label}</span>
+      <span>{eur(value)}</span>
+    </div>
+  );
+}
+
 function Details({
   title,
   items,
@@ -247,14 +292,18 @@ function Details({
 }: {
   title: string;
   items: string[];
-  tone: "red" | "green" | "amber";
+  tone: "red" | "green" | "amber" | "blue" | "purple";
 }) {
   const color =
     tone === "red"
       ? "text-rose-700"
       : tone === "green"
         ? "text-emerald-700"
-        : "text-amber-700";
+        : tone === "blue"
+          ? "text-sky-700"
+          : tone === "purple"
+            ? "text-violet-700"
+            : "text-amber-700";
   return (
     <details
       className="rounded-lg border border-stone-200 bg-white p-4"

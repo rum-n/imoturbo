@@ -1,16 +1,17 @@
 {
   "manifest_version": 3,
   "name": "Imoturbo",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Покупателска интелигентност за български апартаментни обяви на imot.bg.",
   "icons": {
-    "16": "public/icons/icon-16.svg",
-    "48": "public/icons/icon-48.svg",
-    "128": "public/icons/icon-128.svg"
+    "16": "public/icons/icon-16.png",
+    "48": "public/icons/icon-48.png",
+    "128": "public/icons/icon-128.png"
   },
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": [
     "http://localhost:8787/*",
+    "https://imoturbo-production.up.railway.app/*",
     "https://*.imot.bg/*",
     "http://*.imot.bg/*"
   ],
@@ -29,9 +30,9 @@
     "default_popup": "src/popup/index.html",
     "default_title": "Imoturbo",
     "default_icon": {
-      "16": "public/icons/icon-16.svg",
-      "48": "public/icons/icon-48.svg",
-      "128": "public/icons/icon-128.svg"
+      "16": "public/icons/icon-16.png",
+      "48": "public/icons/icon-48.png",
+      "128": "public/icons/icon-128.png"
     }
   }
 }

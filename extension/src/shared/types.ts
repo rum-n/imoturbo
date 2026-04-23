@@ -42,6 +42,15 @@ export type DuplicateSignal = {
   }>;
 };
 
+export type BudgetEstimate = {
+  asking: number;
+  notary_and_taxes: number;
+  broker_commission: number;
+  renovation: number;
+  total: number;
+  notes: string[];
+};
+
 export type AnalysisResult = {
   score: number;
   asking_price: number;
@@ -55,6 +64,9 @@ export type AnalysisResult = {
   red_flags: string[];
   good_signs: string[];
   bullshit_warnings: string[];
+  negotiation_points: string[];
+  questions_to_ask: string[];
+  budget_estimate: BudgetEstimate;
   offer_strategy: string;
   stale_listing: StaleListing;
   duplicate_signal: DuplicateSignal;

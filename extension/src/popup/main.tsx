@@ -3,36 +3,17 @@ import { createRoot } from "react-dom/client";
 import "./styles.css";
 import {
   clearHistory,
-  defaultSettings,
   getHistory,
-  getSettings,
-  setSettings,
 } from "../shared/storage";
 import type { HistoryItem } from "../shared/types";
 
 function Popup() {
   const [history, setHistory] = React.useState<HistoryItem[]>([]);
-  const [backendUrl, setBackendUrl] = React.useState(
-    defaultSettings.backendUrl,
-  );
-  const [saved, setSaved] = React.useState(false);
   const [injectStatus, setInjectStatus] = React.useState<string>();
 
   React.useEffect(() => {
-    void refresh();
+    void getHistory().then(setHistory);
   }, []);
-
-  async function refresh() {
-    const [items, settings] = await Promise.all([getHistory(), getSettings()]);
-    setHistory(items);
-    setBackendUrl(settings.backendUrl);
-  }
-
-  async function saveSettings() {
-    await setSettings({ backendUrl });
-    setSaved(true);
-    setTimeout(() => setSaved(false), 1200);
-  }
 
   async function wipeHistory() {
     await clearHistory();
@@ -100,29 +81,6 @@ function Popup() {
         {injectStatus && (
           <p className="mt-2 text-xs text-stone-500">{injectStatus}</p>
         )}
-      </section>
-
-      <section className="mt-4 rounded-lg border border-stone-200 bg-white p-3">
-        <label
-          className="text-xs font-semibold text-stone-500"
-          htmlFor="backend-url"
-        >
-          URL на бекенда
-        </label>
-        <div className="mt-2 flex gap-2">
-          <input
-            id="backend-url"
-            className="min-w-0 flex-1 rounded-md border border-stone-300 px-3 py-2 text-sm outline-none focus:border-emerald-700"
-            value={backendUrl}
-            onChange={(event) => setBackendUrl(event.target.value)}
-          />
-          <button
-            className="rounded-md bg-[#171717] px-3 py-2 text-sm font-semibold text-white"
-            onClick={saveSettings}
-          >
-            {saved ? "Запазено" : "Запази"}
-          </button>
-        </div>
       </section>
 
       <section className="mt-4 space-y-3">

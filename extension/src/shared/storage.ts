@@ -9,7 +9,7 @@ export type Settings = {
 };
 
 export const defaultSettings: Settings = {
-  backendUrl: "http://localhost:8787"
+  backendUrl: "https://imoturbo-production.up.railway.app"
 };
 
 export async function getSettings(): Promise<Settings> {
