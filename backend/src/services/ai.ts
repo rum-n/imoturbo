@@ -348,9 +348,13 @@ function ruleBasedAnalysis(listing: ListingInput): AnalysisResult {
 
 export async function analyzeListing(
   listing: ListingInput,
+  userApiKey?: string,
 ): Promise<AnalysisResult> {
   const fallback = ruleBasedAnalysis(listing);
-  if (!client) return fallback;
+  const activeClient = userApiKey
+    ? new OpenAI({ apiKey: userApiKey })
+    : client;
+  if (!activeClient) return fallback;
 
   const prompt = [
     "Analyze this Bulgarian apartment listing for buyer intelligence.",
@@ -362,7 +366,7 @@ export async function analyzeListing(
   ].join("\n");
 
   try {
-    const response = await client.chat.completions.create({
+    const response = await activeClient.chat.completions.create({
       model,
       temperature: 0.2,
       response_format: { type: "json_object" },

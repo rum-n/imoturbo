@@ -6,10 +6,12 @@ const MAX_HISTORY = 100;
 
 export type Settings = {
   backendUrl: string;
+  openaiApiKey: string;
 };
 
 export const defaultSettings: Settings = {
-  backendUrl: "https://imoturbo-production.up.railway.app"
+  backendUrl: "https://imoturbo-production.up.railway.app",
+  openaiApiKey: ""
 };
 
 export async function getSettings(): Promise<Settings> {

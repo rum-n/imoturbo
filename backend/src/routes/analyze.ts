@@ -35,7 +35,10 @@ analyzeRouter.post("/", async (req, res, next) => {
       return;
     }
 
-    const result = await analyzeListing(listing);
+    const userApiKey = typeof req.headers["x-openai-api-key"] === "string"
+      ? req.headers["x-openai-api-key"]
+      : undefined;
+    const result = await analyzeListing(listing, userApiKey);
     cache.set(key, result);
     res.json(result);
   } catch (error) {

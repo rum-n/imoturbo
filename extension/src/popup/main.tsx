@@ -4,16 +4,30 @@ import "./styles.css";
 import {
   clearHistory,
   getHistory,
+  getSettings,
+  setSettings,
 } from "../shared/storage";
 import type { HistoryItem } from "../shared/types";
 
 function Popup() {
   const [history, setHistory] = React.useState<HistoryItem[]>([]);
+  const [openaiApiKey, setOpenaiApiKey] = React.useState("");
+  const [saved, setSaved] = React.useState(false);
   const [injectStatus, setInjectStatus] = React.useState<string>();
 
   React.useEffect(() => {
-    void getHistory().then(setHistory);
+    void Promise.all([getHistory(), getSettings()]).then(([items, settings]) => {
+      setHistory(items);
+      setOpenaiApiKey(settings.openaiApiKey ?? "");
+    });
   }, []);
+
+  async function saveSettings() {
+    const current = await getSettings();
+    await setSettings({ ...current, openaiApiKey });
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1500);
+  }
 
   async function wipeHistory() {
     await clearHistory();
@@ -81,6 +95,31 @@ function Popup() {
         {injectStatus && (
           <p className="mt-2 text-xs text-stone-500">{injectStatus}</p>
         )}
+      </section>
+
+      <section className="mt-4 rounded-lg border border-stone-200 bg-white p-3">
+        <label className="text-xs font-semibold text-stone-500" htmlFor="openai-key">
+          OpenAI API ключ (по избор)
+        </label>
+        <p className="mt-1 text-xs text-stone-400">
+          Добавете свой ключ за AI-подобрени анализи.
+        </p>
+        <div className="mt-2 flex gap-2">
+          <input
+            id="openai-key"
+            type="password"
+            placeholder="sk-..."
+            className="min-w-0 flex-1 rounded-md border border-stone-300 px-3 py-2 text-sm outline-none focus:border-emerald-700"
+            value={openaiApiKey}
+            onChange={(e) => setOpenaiApiKey(e.target.value)}
+          />
+          <button
+            className="rounded-md bg-[#171717] px-3 py-2 text-sm font-semibold text-white"
+            onClick={saveSettings}
+          >
+            {saved ? "Запазено" : "Запази"}
+          </button>
+        </div>
       </section>
 
       <section className="mt-4 space-y-3">
