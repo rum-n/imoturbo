@@ -112,8 +112,7 @@ function buildQuestionsToAsk(listing: ListingInput): string[] {
   const text = textFor(listing);
   const questions: string[] = [];
 
-  const isNewBuilding = /ново строителство|нова сграда|в строеж|акт 14|акт 15|груб строеж/i.test(text)
-    || /\b20(2\d|30)\b/.test(text);
+  const isNewBuilding = /ново строителство|нова сграда|в строеж|акт 14|акт 15|груб строеж/i.test(text);
   if (isNewBuilding && !/акт 16/i.test(text))
     questions.push("Издаден ли е Акт 16? Ако не — кога се очаква?");
 
